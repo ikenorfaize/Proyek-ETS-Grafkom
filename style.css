@@ -1,0 +1,149 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #f8f1f1;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 60px;
+}
+
+#gl-canvas {
+    border: 2px solid hotpink;
+    border-radius: 8px;
+    width: 720px;
+    height: 720px;
+    margin-right: 40px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.rotation-controls, .speed-controls, .action-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+button, #ModeSelect {
+    margin: 5px;
+    padding: 12px 24px;
+    background-color: hotpink;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #a7097a
+}
+
+.slider-container {
+    margin: 15px 0;
+    width: 300px;
+}
+
+.slider-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: pink;
+    outline: none;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: hotpink;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: hotpink;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    color: #d61f8f;
+    text-align: center;
+}
+
+.description {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 700px;
+    color: #555;
+}
+
+.info div {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.formula {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    margin: 15px 0;
+    background-color: pink;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.description ul {
+    padding-left: 20px;
+    margin: 10px 0;
+    list-style-type: none;
+}
+
+.description ul li {
+    padding: 8px 0;
+}
+
+.description ul li span {
+    font-weight: bold;
+    color: hotpink;
+}
