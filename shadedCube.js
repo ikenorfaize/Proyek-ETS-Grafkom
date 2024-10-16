@@ -55,6 +55,19 @@ var shadedCube = function () {
   var speedMultiplier = 1;
   var isAccelerationMode = true; // New variable to track mode
 
+  var zoomFactor = 1.0; // New variable for zoom
+
+  var startPoint = vec3(-1.0, -0.5, 0.0);
+  var finishPoint = vec3(1.0, -0.5, 0.0);
+  var pathLength = 2.0; // Default path length in meters
+
+  function updatePath() {
+    startPoint = vec3(-pathLength/2, -0.5, 0.0);
+    finishPoint = vec3(pathLength/2, -0.5, 0.0);
+    translation = vec3(-pathLength/2, 0.0, 0.0); // Reset cube position to start
+    document.getElementById("distanceValue").textContent = "0.00"; // Reset distance traveled
+  }
+
   init();
 
   function quad(a, b, c, d) {
@@ -225,7 +238,42 @@ var shadedCube = function () {
     // Inisialisasi nilai awal massa pada tampilan
     document.getElementById("massValue").textContent = mass.toFixed(2);
 
+    document.getElementById("ZoomIn").onclick = function () {
+        zoomFactor *= 1.1;
+        updateProjectionMatrix();
+    };
+    document.getElementById("ZoomOut").onclick = function () {
+        zoomFactor /= 1.1;
+        updateProjectionMatrix();
+    };
+
+    document.getElementById("pathLengthInput").oninput = function (event) {
+      pathLength = parseFloat(event.target.value);
+      document.getElementById("pathLengthValue").textContent = pathLength.toFixed(1);
+      updatePath();
+      // Reset simulation
+      moveFlag = false;
+      velocity = 0;
+      acceleration = 0;
+      time = 0;
+      document.getElementById("velocityValue").textContent = velocity.toFixed(2);
+      document.getElementById("accelerationValue").textContent = acceleration.toFixed(2);
+      document.getElementById("timeValue").textContent = time.toFixed(2);
+      // reset slider too
+      document.getElementById("forceSlider").value = 0;
+      document.getElementById("massSlider").value = 25;
+      document.getElementById("frictionSlider").value = 0.1;
+      document.getElementById("forceValue").textContent = 0;
+      document.getElementById("massValue").textContent = 25;
+      document.getElementById("frictionValue").textContent = 0.1;
+    };
+
     render();
+  }
+
+  function updateProjectionMatrix() {
+    projectionMatrix = ortho(-1/zoomFactor, 1/zoomFactor, -1/zoomFactor, 1/zoomFactor, -10, 10);
+    gl.uniformMatrix4fv(gl.getUniformLocation(program, "uProjectionMatrix"), false, flatten(projectionMatrix));
   }
 
   function render() {
@@ -245,13 +293,17 @@ var shadedCube = function () {
       }
 
       translation[0] += velocity * 0.01 * speedMultiplier; // Move to the right
-      translation[2] += velocity * 0.01 * speedMultiplier; // Move further away
 
       time += 0.01 * speedMultiplier; // Update time
 
-      if (translation[0] > 1.0) {
+      if (translation[0] > pathLength/2) {
+        translation[0] = pathLength/2; // Ensure the cube doesn't go beyond the path
         moveFlag = false;
       }
+
+      // Update distance traveled
+      var distanceTraveled = translation[0] - (-pathLength/2);
+      document.getElementById("distanceValue").textContent = distanceTraveled.toFixed(2);
 
       document.getElementById("velocityValue").textContent = velocity.toFixed(2);
       document.getElementById("accelerationValue").textContent = acceleration.toFixed(2);
@@ -275,6 +327,8 @@ var shadedCube = function () {
     gl.uniformMatrix4fv(gl.getUniformLocation(program, "uModelViewMatrix"), false, flatten(modelViewMatrix));
 
     gl.drawArrays(gl.TRIANGLES, 0, numPositions);
+
+    updateProjectionMatrix(); // Add this line to update projection matrix every frame
 
     requestAnimationFrame(render);
   }
