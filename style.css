@@ -147,3 +147,56 @@ input[type="range"]::-moz-range-thumb {
     font-weight: bold;
     color: hotpink;
 }
+
+.zoom-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.zoom-controls button {
+    margin: 5px;
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.zoom-controls button:hover {
+    background-color: #45a049;
+}
+
+/* Add this to style the path length input */
+#pathLengthInput {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: pink;
+    outline: none;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+#pathLengthInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: hotpink;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#pathLengthInput::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: hotpink;
+    cursor: pointer;
+}
