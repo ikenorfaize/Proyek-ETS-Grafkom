@@ -184,9 +184,15 @@ var shadedCube = function () {
         document.getElementById("forceSlider").value = 0;
         document.getElementById("massSlider").value = 25;
         document.getElementById("frictionSlider").value = 0.1;
+        document.getElementById("pathLengthInput").value = 2.0;
         document.getElementById("forceValue").textContent = 0;
         document.getElementById("massValue").textContent = 25;
         document.getElementById("frictionValue").textContent = 0.1;
+        document.getElementById("pathLengthValue").textContent = 2;
+        document.getElementById("distanceValue").textContent = "0.00";
+        // reset rotate
+        theta = vec3(0, 0, 0);
+        flag = false;
     };
 
     document.getElementById("Speed0_5x").onclick = function () {
